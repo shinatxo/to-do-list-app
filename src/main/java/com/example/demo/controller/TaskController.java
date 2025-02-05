@@ -19,21 +19,33 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable ObjectId id) {
-        Optional<Task> task = taskService.getTasksById(id);
+    public ResponseEntity<Task> getTaskById(@PathVariable String id) {
+        if (!ObjectId.isValid(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+        ObjectId objectId = new ObjectId(id);
+        Optional<Task> task = taskService.getTasksById(objectId);
         return task.map(ResponseEntity::ok)
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable ObjectId id, @RequestBody Task updatedTask) {
-        Task task = taskService.updateTask(id, updatedTask);
+    public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task updatedTask) {
+        if (!ObjectId.isValid(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+        ObjectId objectId = new ObjectId(id);
+        Task task = taskService.updateTask(objectId, updatedTask);
         return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable ObjectId id) {
-        taskService.deleteTask(id);
+    public ResponseEntity<Void> deleteTask(@PathVariable String id) {
+        if (!ObjectId.isValid(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+        ObjectId objectId = new ObjectId(id);
+        taskService.deleteTask(objectId);
         return ResponseEntity.noContent().build();
     }
 
