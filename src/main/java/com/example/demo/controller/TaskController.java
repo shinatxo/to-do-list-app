@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Task;
 import com.example.demo.service.TaskService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,21 +19,21 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
-        Optional<Task> task = taskService.getTasksById(id.toString());
+    public ResponseEntity<Task> getTaskById(@PathVariable ObjectId id) {
+        Optional<Task> task = taskService.getTasksById(id);
         return task.map(ResponseEntity::ok)
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
-        Task task = taskService.updateTask(id.toString(), updatedTask);
+    public ResponseEntity<Task> updateTask(@PathVariable ObjectId id, @RequestBody Task updatedTask) {
+        Task task = taskService.updateTask(id, updatedTask);
         return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        taskService.deleteTask(id.toString());
+    public ResponseEntity<Void> deleteTask(@PathVariable ObjectId id) {
+        taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
     }
 
