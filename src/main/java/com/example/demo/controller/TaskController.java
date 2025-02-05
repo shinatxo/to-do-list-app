@@ -3,15 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.model.Task;
 import com.example.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -20,32 +17,34 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
-    }
-
-    @PostMapping
-    public Task createTask(@RequestBody Task task) {
-        return taskService.addTask(task);
-    }
-
     @GetMapping("/{id}")
-    public Task getTasksById(@PathVariable String id) {
-        return taskService.getTasksById(id).orElse(null);
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        Optional<Task> task = taskService.getTasksById(id.toString());
+        return task.map(ResponseEntity::ok)
+                   .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public Task updateTask(@PathVariable String id, @RequestBody Task task) {
-        return taskService.updateTask(id, task);
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask) {
+        Task task = taskService.updateTask(id.toString(), updatedTask);
+        return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable String id) {
-        taskService.deleteTask(id);
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id.toString());
+        return ResponseEntity.noContent().build();
     }
-    
-    public String getMethodName(@RequestParam String param) {
-    return new String();
+
+    @GetMapping
+    public ResponseEntity<List<Task>> getAllTasks() {
+        List<Task> tasks = taskService.getAllTasks();
+        return ResponseEntity.ok(tasks);
+    }
+
+    @PostMapping
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        Task createdTask = taskService.addTask(task);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
 }
