@@ -21,7 +21,9 @@ public class Task {
     }
 
     // Getters and Setters
-    public ObjectId getId() { return id; }
+    public String getId() { 
+        return id != null ? id.toHexString() : null;
+    }
     public void setId(ObjectId id) { this.id = id; }
 
     public String getTitle() { return title; }
