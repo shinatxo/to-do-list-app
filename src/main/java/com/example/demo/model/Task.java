@@ -7,6 +7,7 @@ public class Task {
 
    // Constructors
    public Task() {}
+   
     public Task(Long id, String title, boolean completed) {
         this.id = id;
         this.title = title;
