@@ -2,14 +2,19 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Task;
 import com.example.demo.service.TaskService;
+
 import org.bson.types.ObjectId;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -56,7 +61,10 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+    public ResponseEntity<?> createTask(@Valid @RequestBody Task task, BindingResult result) {
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getAllErrors());
+        }
         Task createdTask = taskService.addTask(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
