@@ -1,95 +1,76 @@
-# To-Do List API
+# To-Do List App
 
-This is a RESTful API for a To-Do List application, built using **Spring Boot** and **MongoDB**.
+This is a full-stack To-Do List application built using **Java (Spring Boot) for the backend** and **React (Vite) for the frontend**. It allows users to manage their tasks efficiently.
 
 ## Features
-- Create, update, delete, and list tasks
-- Uses MongoDB as a NoSQL database
-- RESTful API endpoints
+- RESTful API with CRUD operations
+- MongoDB for data storage
+- Frontend built with React + Vite
+- Uses Postman for API testing
+- Docker setup for containerization
+- Deployed on GitHub
 
-## Prerequisites
-- Java 17+
-- Maven
-- Docker (for containerization)
+## Tech Stack
+### Backend:
+- Java 17
+- Spring Boot 3.4.2
+- Spring Data MongoDB
+- JUnit for testing
+
+### Frontend:
+- React (Vite)
+- Fetch API for API requests
+- Tailwind CSS (optional for styling)
 
 ## Installation
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/todo-list-api.git
-   cd todo-list-api
-   ```
-2. Build the project using Maven:
-   ```sh
-   mvn clean install
-   ```
-3. Run the application:
-   ```sh
-   mvn spring-boot:run
-   ```
-
-## Running with Docker
-
-1. **Build the Docker image:**
-   ```sh
-   docker build -t todo-list-api .
-   ```
-2. **Run the container:**
-   ```sh
-   docker run -p 8080:8080 todo-list-api
-   ```
-
-## Running with Docker Compose (MongoDB included)
-
-Create a `docker-compose.yml` file with the following content:
-
-```yaml
-version: '3.8'
-services:
-  mongo:
-    image: mongo:latest
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_DATABASE: tododb
-  app:
-    build: .
-    container_name: todo-app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mongo
+### 1. Clone the Repository
+```sh
+git clone https://github.com/shinatxo/to-do-list-app.git
+cd to-do-list-app
 ```
 
-Then run:
+### 2. Run the Backend
+Ensure you have **Java 17+** and **Maven** installed.
+```sh
+cd restful-api-project
+mvn spring-boot:run
+```
+
+### 3. Run the Frontend
+Ensure you have **Node.js 18+** and **npm** installed.
+```sh
+cd todo-frontend
+npm install
+npm run dev
+```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## API Endpoints
+| Method | Endpoint        | Description          |
+|--------|----------------|----------------------|
+| GET    | /tasks         | Get all tasks       |
+| POST   | /tasks         | Create a new task   |
+| PUT    | /tasks/{id}    | Update a task       |
+| DELETE | /tasks/{id}    | Delete a task       |
+
+## Running Tests
+To run the backend tests:
+```sh
+mvn test
+```
+
+## Docker Setup
+Build and run the application using Docker:
 ```sh
 docker-compose up --build
 ```
 
-## API Endpoints
+## Deployment
+TBD (coming soon)
 
-| Method | Endpoint        | Description        |
-|--------|---------------|--------------------|
-| GET    | /tasks        | Get all tasks      |
-| POST   | /tasks        | Create a new task |
-| PUT    | /tasks/{id}   | Update a task     |
-| DELETE | /tasks/{id}   | Delete a task     |
-
-## Testing with Postman
-
-You can use Postman to interact with the API. Example request:
-
-- **Create a task:**
-  ```json
-  {
-    "title": "Learn Docker",
-    "completed": false
-  }
-  ```
-
-## Contributing
-Feel free to fork the repository and submit pull requests!
+## Contributors
+- **Shina Oguntoye**
 
 ## License
 This project is licensed under the MIT License.
