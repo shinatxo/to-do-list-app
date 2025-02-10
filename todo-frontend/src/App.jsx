@@ -4,7 +4,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/tasks")
+    fetch("http://localhost:8080/api/tasks")
       .then((response) => response.json())
       .then((data) => {
         console.log("Fetched tasks:", data);
