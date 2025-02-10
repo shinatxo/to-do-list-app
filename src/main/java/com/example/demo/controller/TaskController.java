@@ -40,8 +40,22 @@ public class TaskController {
             return ResponseEntity.badRequest().build();
         }
         ObjectId objectId = new ObjectId(id);
-        Task task = taskService.updateTask(objectId, updatedTask);
-        return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
+
+        Optional<Task> existingTask = taskService.getTasksById(objectId);
+        if (existingTask.isPresent()) {
+            Task taskToUpdate = existingTask.get();
+
+            if (updatedTask.getTitle() != null) {
+                taskToUpdate.setTitle(updatedTask.getTitle());
+            }
+            if (updatedTask.getCompleted() != null) {
+                taskToUpdate.setCompleted(updatedTask.getCompleted());
+            }
+
+            Task updated = taskService.updateTask(objectId, taskToUpdate);
+            return ResponseEntity.ok(updated);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")

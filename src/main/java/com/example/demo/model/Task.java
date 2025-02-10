@@ -20,22 +20,37 @@ public class Task {
    private Boolean completed;
 
    // Constructors
-   public Task() {}
+   public Task() {
+   }
    
-   public Task(String title, boolean completed) {
+   public Task(String title, Boolean completed) {
         this.title = title;
         this.completed = completed;
     }
 
     // Getters and Setters
-    public String getId() { 
-        return id != null ? id.toHexString() : null;
+
+    public ObjectId getId() {
+        return id;
     }
-    public void setId(ObjectId id) { this.id = id; }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public void setId(ObjectId id) { 
+        this.id = id;
+    }
 
-    public boolean isCompleted() { return completed; }
-    public void setCompleted(boolean completed) { this.completed = completed; }
-   }
+    public String getTitle() { 
+        return title; 
+    }
+
+    public void setTitle(String title) { 
+        this.title = title; 
+    }
+
+    public Boolean getCompleted() { 
+        return completed; 
+    }
+
+    public void setCompleted(boolean completed) {
+         this.completed = completed; 
+    }
+}
