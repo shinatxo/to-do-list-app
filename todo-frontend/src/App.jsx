@@ -6,7 +6,10 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:8080/tasks")
       .then((response) => response.json())
-      .then((data) => setTasks(data))
+      .then((data) => {
+        console.log("Fetched tasks:", data);
+        setTasks(data);
+      })
       .catch((error) => console.error("Error fetching tasks:", error));
   }, []);
 
