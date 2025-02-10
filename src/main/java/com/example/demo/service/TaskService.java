@@ -32,7 +32,7 @@ public class TaskService {
         return taskRepository.findById(id)
                 .map(task -> {
                     task.setTitle(updatedTask.getTitle());
-                    task.setCompleted(updatedTask.isCompleted());
+                    task.setCompleted(updatedTask.getCompleted());
                     return taskRepository.save(task);
                 })
                 .orElse(null);

@@ -78,7 +78,7 @@ public class TaskServiceTest {
 
         assertNotNull(result);
         assertEquals("Updated Task", result.getTitle());
-        assertTrue(result.isCompleted());
+        assertTrue(result.getCompleted());
         verify(taskRepository, times(1)).save(sampleTask);
     }
 
