@@ -19,14 +19,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Apply CORS settings properly
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Apply CORS properly
             .csrf(csrf -> csrf.disable()) // Disable CSRF for API requests
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/**").permitAll() // Allow all API routes
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Use stateless sessions
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Ensure stateless sessions
             );
 
         return http.build();
@@ -38,7 +38,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of("http://localhost:5173")); // Allow frontend access
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*")); // Allow all headers
-        configuration.setAllowCredentials(true); // Allow credentials (important for some cases)
+        configuration.setAllowCredentials(true); // Allow credentials if needed
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
