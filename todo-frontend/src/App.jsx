@@ -49,33 +49,72 @@ function App() {
       .catch(error => console.error("Error deleting task:", error));
   };
 
+  const clearTasks = () => {
+    fetch("http://localhost:8080/api/tasks", {
+      method: "DELETE"
+    })
+      .then(() => setTasks([]))
+      .catch(error => console.error("Error clearing tasks:", error));
+  };
+
   return (
-    <div>
-      <h1>To-Do List</h1>
+    <div className="max-w-lg mx-auto p-4 bg-gray-100 rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold text-center mb-4">To-Do List</h1>
 
-      {/* Input field for new task */}
-      <input
-        type="text"
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            addTask();
-          }
-        }}
-        placeholder="Enter a new task"
+      <div className="flex gap-2 mb-4">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              addTask();
+            }
+          }}
+          placeholder="Enter a new task"
+          className="flex-1 p-2 border rounded"
       />
-      <button onClick={addTask}>Add Task</button>
+      <button 
+        onClick={addTask}
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Add Task
+      </button>
+    </div>
 
-      <ul>
+      <ul className="space-y-2">
         {tasks.map((task) => (
-          <li key={task.id}>
-            {task.title} - {task.completed ? "Completed ✅" : "Not Completed ❌"}
-            <button onClick={() => toggleCompletion(task)}>Toggle</button>
-            <button onClick={() => deleteTask(task.id)}>Delete</button>
+          <li 
+            key={task.id}
+            className="flex justify-between items-center p-2 bg-white rounded shadow"  
+          >
+            <span>
+              {task.title} - {task.completed ? "Completed ✅" : "Not Completed ❌"}
+            </span>
+            <div className="space-x-2">
+              <button 
+                onClick={() => toggleCompletion(task)}
+                className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"  
+              >
+                Toggle
+              </button>
+              <button 
+                onClick={() => deleteTask(task.id)}
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
+
+      <button
+        onClick={clearTasks}
+        className="mt-4 w-full bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+      >
+        Clear All Tasks
+      </button>
     </div>
   );
 }
