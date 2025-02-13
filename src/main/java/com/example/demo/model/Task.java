@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.bson.types.ObjectId;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -10,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
 public class Task {
 
     @Id
-   private ObjectId id;
+   private String id;
    
 
    @NotBlank(message = "Title is required")
@@ -31,11 +30,11 @@ public class Task {
     // Getters and Setters
 
     public String getId() {
-        return id.toHexString();
+        return id;
     }
 
     public void setId(String id) { 
-        this.id = new ObjectId(id);
+        this.id = id;
     }
 
     public String getTitle() { 

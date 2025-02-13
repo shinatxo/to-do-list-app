@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.model.Task;
 import com.example.demo.repository.TaskRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,11 @@ public class TaskService {
         return taskRepository.save(task);
    }
 
-    public Optional<Task> getTasksById(ObjectId id) {
+    public Optional<Task> getTasksById(String id) {
         return taskRepository.findById(id);
     }
 
-    public Task updateTask(ObjectId id, Task updatedTask) {
+    public Task updateTask(String id, Task updatedTask) {
         return taskRepository.findById(id)
                 .map(task -> {
                     task.setTitle(updatedTask.getTitle());
@@ -38,7 +37,7 @@ public class TaskService {
                 .orElse(null);
     }
 
-    public void deleteTask(ObjectId id) {
+    public void deleteTask(String id) {
         taskRepository.deleteById(id);
     }
 

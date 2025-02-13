@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.model.Task;
 import com.example.demo.repository.TaskRepository;
-import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -56,7 +55,7 @@ public class TaskServiceTest {
 
     @Test
     void testGetTaskById() {
-        ObjectId id = new ObjectId();
+        String id = new String();
         when(taskRepository.findById(id)).thenReturn(Optional.of(sampleTask));
 
         Optional<Task> retrievedTask = taskService.getTasksById(id);
@@ -68,7 +67,7 @@ public class TaskServiceTest {
 
     @Test
     void testUpdateTask() {
-        ObjectId id = new ObjectId();
+        String id = new String();
         Task updatedTask = new Task("Updated Task", true);
 
         when(taskRepository.findById(id)).thenReturn(Optional.of(sampleTask));
@@ -84,7 +83,7 @@ public class TaskServiceTest {
 
     @Test 
     void testDeleteTask() {
-        ObjectId id = new ObjectId();
+        String id = new String();
         doNothing().when(taskRepository).deleteById(id);
         taskService.deleteTask(id);
         verify(taskRepository, times(1)).deleteById(id);

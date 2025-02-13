@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Task;
 import com.example.demo.service.TaskService;
 
-import org.bson.types.ObjectId;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,51 +23,24 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable String id) {
-        if (!ObjectId.isValid(id)) {
-            return ResponseEntity.badRequest().build();
-        }
-        ObjectId objectId = new ObjectId(id);
-        Optional<Task> task = taskService.getTasksById(objectId);
+        Optional<Task> task = taskService.getTasksById(id);
         return task.map(ResponseEntity::ok)
                    .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable String id, @RequestBody Task updatedTask) {
-        if (!ObjectId.isValid(id)) {
-            return ResponseEntity.badRequest().build();
-        }
-        ObjectId objectId = new ObjectId(id);
-        Task task = taskService.updateTask(objectId, updatedTask);
-
-        Optional<Task> existingTask = taskService.getTasksById(objectId);
-        if (existingTask.isPresent()) {
-            Task taskToUpdate = existingTask.get();
-
-            if (updatedTask.getTitle() != null) {
-                taskToUpdate.setTitle(updatedTask.getTitle());
-            }
-            if (updatedTask.getCompleted() != null) {
-                taskToUpdate.setCompleted(updatedTask.getCompleted());
-            }
-
-            Task updated = taskService.updateTask(objectId, taskToUpdate);
-            return ResponseEntity.ok(updated);
-        }
-        return task != null ? ResponseEntity.ok(task) : ResponseEntity.notFound().build();
+        Task updated = taskService.updateTask(id, updatedTask);
+        return updated != null ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
     }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable String id) {
-        if (!ObjectId.isValid(id)) {
-            return ResponseEntity.badRequest().build();
-        }
-        ObjectId objectId = new ObjectId(id);
-        taskService.deleteTask(objectId);
+        taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/tasks/all")
+    @DeleteMapping("/all")
     public ResponseEntity<Void> deleteAllTasks() {
         taskService.deleteAllTasks();
         return ResponseEntity.noContent().build();
