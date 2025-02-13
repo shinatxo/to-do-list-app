@@ -28,10 +28,12 @@ function App() {
   };
 
   const toggleCompletion = (task) => {
+    const updatedTask = {...task, completed: !task.completed};
+  
     fetch(`http://localhost:8080/api/tasks/${task.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...task, completed: !task.completed }),
+      body: JSON.stringify(updatedTask),
     })
     .then(response => response.json())
     .then(updatedTask => {

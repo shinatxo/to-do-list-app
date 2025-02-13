@@ -40,7 +40,7 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/all")
+    @DeleteMapping("/tasks/all")
     public ResponseEntity<Void> deleteAllTasks() {
         taskService.deleteAllTasks();
         return ResponseEntity.noContent().build();
