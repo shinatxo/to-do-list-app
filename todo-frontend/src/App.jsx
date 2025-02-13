@@ -17,13 +17,15 @@ function App() {
       body: JSON.stringify({ completed: !completed }),
     })
       .then((response) => response.json())
-      .then((updatedTask) => 
+      .then((updatedTask) => {
         setTasks((tasks) => 
-          tasks.map((task) => (task.id === id ? updatedTask : task))
+          tasks.map((task) => 
+            task.id === id ? {...task, completed: updatedTask.completed } : task
       )
-    )
-    .catch((error) => console.error("Error updating task:", error));
-  };
+    );
+  })
+  .catch((error) => console.error("Error updating task:", error));
+};
 
   const deleteTask = (id) => {
     fetch(`http://localhost:8080/api/tasks/${id}`, {
