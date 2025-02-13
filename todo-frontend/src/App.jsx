@@ -8,7 +8,7 @@ function App() {
       .then((response) => response.json())
       .then((data) => setTasks(data))
       .catch((error) => console.error("Error fetching tasks:", error));
-  }, []);
+  }, [tasks]);
 
   const toggleCompletion = (id, completed) => {
     console.log("Toggling completion for task with id:", id);
@@ -33,8 +33,8 @@ function App() {
     fetch(`http://localhost:8080/api/tasks/${id}`, {
       method: "DELETE"
     })
-      .then(() => setTasks((tasks) => tasks.filter((task) => task.id !== id)))
-      .catch((error) => console.error("Error deleting task:", error));
+      .then(() => setTasks(tasks.filter(task => task.id !== id)))
+      .catch(error => console.error("Error deleting task:", error));
   };
 
   return (
@@ -42,7 +42,7 @@ function App() {
       <h1>To-Do List</h1>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id ?? Math.random()}>
+          <li key={task.id}>
             <span 
               onClick={() => toggleCompletion(task.id, task.completed)}
               style={{

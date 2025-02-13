@@ -30,12 +30,12 @@ public class Task {
 
     // Getters and Setters
 
-    public ObjectId getId() {
-        return id;
+    public String getId() {
+        return id.toHexString();
     }
 
-    public void setId(ObjectId id) { 
-        this.id = id;
+    public void setId(String id) { 
+        this.id = new ObjectId(id);
     }
 
     public String getTitle() { 
