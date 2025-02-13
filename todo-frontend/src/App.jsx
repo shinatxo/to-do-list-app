@@ -11,6 +11,7 @@ function App() {
   }, []);
 
   const toggleCompletion = (id, completed) => {
+    console.log("Toggling completion for task with id:", id);
     fetch(`http://localhost:8080/api/tasks/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -28,6 +29,7 @@ function App() {
 };
 
   const deleteTask = (id) => {
+    console.log("Deleting task with id:", id);
     fetch(`http://localhost:8080/api/tasks/${id}`, {
       method: "DELETE"
     })
@@ -40,7 +42,7 @@ function App() {
       <h1>To-Do List</h1>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>
+          <li key={task.id ?? Math.random()}>
             <span 
               onClick={() => toggleCompletion(task.id, task.completed)}
               style={{
