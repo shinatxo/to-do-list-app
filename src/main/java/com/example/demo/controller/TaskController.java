@@ -69,6 +69,12 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/tasks/all")
+    public ResponseEntity<Void> clearAllTasks() {
+        taskService.deleteAllTasks();
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
         List<Task> tasks = taskService.getAllTasks();
