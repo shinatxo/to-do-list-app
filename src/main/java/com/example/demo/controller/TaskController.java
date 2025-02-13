@@ -70,7 +70,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/tasks/all")
-    public ResponseEntity<Void> clearAllTasks() {
+    public ResponseEntity<Void> deleteAllTasks() {
         taskService.deleteAllTasks();
         return ResponseEntity.noContent().build();
     }

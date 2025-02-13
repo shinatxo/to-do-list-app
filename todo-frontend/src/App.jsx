@@ -50,7 +50,7 @@ function App() {
   };
 
   const clearTasks = () => {
-    fetch("http://localhost:8080/api/tasks", {
+    fetch("http://localhost:8080/api/tasks/all", {
       method: "DELETE"
     })
       .then(() => setTasks([]))
