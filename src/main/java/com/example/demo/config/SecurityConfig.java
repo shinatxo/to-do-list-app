@@ -19,14 +19,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Apply CORS properly
-            .csrf(csrf -> csrf.disable()) // Disable CSRF for API requests
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) 
+            .csrf(csrf -> csrf.disable()) 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/**").permitAll() // Allow all API routes
-                .anyRequest().authenticated()
+                .requestMatchers("/**").permitAll() // Allow all requests temporarily
+                .anyRequest().permitAll()
             )
             .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Ensure stateless sessions
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );
 
         return http.build();
@@ -35,10 +35,14 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173","https://to-do-list-app-122e.onrender.com", "https://*.onrender.com")); // Allow frontend access
+        configuration.setAllowedOrigins(List.of(
+            "http://localhost:5173", 
+            "https://to-do-list-app-122e.onrender.com", 
+            "https://*.onrender.com"
+        )); 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*")); // Allow all headers
-        configuration.setAllowCredentials(true); // Allow credentials if needed
+        configuration.setAllowedHeaders(List.of("*")); 
+        configuration.setAllowCredentials(true); 
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
