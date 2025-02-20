@@ -10,13 +10,11 @@ services:
     healthCheckPath: /
     plan: free
 
-  - type: static
+  - type: static_site  # <-- Change here from "static" to "static_site"
     name: todo-frontend
-    env: static
     rootDir: todo-frontend
     buildCommand: npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         value: https://todo-backend.onrender.com
-
