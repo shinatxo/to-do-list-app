@@ -1,0 +1,7 @@
+services:
+  - type: static
+    name: todo-frontend
+    env: static
+    rootDir: todo-frontend
+    buildCommand: npm run build
+    staticPublishPath: dist
