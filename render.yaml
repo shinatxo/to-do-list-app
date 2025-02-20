@@ -1,7 +1,22 @@
 services:
+  - type: web
+    name: todo-backend
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/demo-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+    healthCheckPath: /
+    plan: free
+
   - type: static
     name: todo-frontend
     env: static
     rootDir: todo-frontend
     buildCommand: npm run build
     staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://todo-backend.onrender.com
+
