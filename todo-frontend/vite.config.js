@@ -6,7 +6,3 @@ export default defineConfig({
   plugins: [react()],
 });
 
-const apiUrl = import.meta.env.VITE_API_URL;
-fetch(`${apiUrl}/your-endpoint`)
-  .then(response => response.json())
-  .then(data => console.log(data));

@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+fetch(`${apiUrl}/your-endpoint`)
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
