@@ -2,6 +2,14 @@
 
 This is a full-stack **To-Do List Application** built with **Java (Spring Boot) for the backend** and **React (Vite) for the frontend**. It provides a simple and efficient way to manage tasks with full CRUD functionality.
 
+---
+
+## 🚀 Live Demo
+- **Frontend:** [https://to-do-list-app-1-v3ji.onrender.com](https://to-do-list-app-1-v3ji.onrender.com)
+- **Backend API Base URL:** [https://to-do-list-app-122e.onrender.com](https://to-do-list-app-122e.onrender.com)
+
+---
+
 ## 🚀 Features
 - RESTful API with full CRUD operations
 - MongoDB for data storage
@@ -10,7 +18,7 @@ This is a full-stack **To-Do List Application** built with **Java (Spring Boot) 
 - Uses Postman for API testing
 - Docker setup for containerization
 - CORS enabled for frontend-backend communication
-- Deployment ready (to be determined)
+- **Deployed on Render**
 
 ---
 
@@ -28,8 +36,8 @@ This is a full-stack **To-Do List Application** built with **Java (Spring Boot) 
 - **Tailwind CSS for modern styling**
 
 ### Deployment:
+- **Render** (Cloud deployment for both frontend and backend)
 - **Docker & Docker Compose** (for containerized setup)
-- **TBD - Cloud deployment options**
 
 ---
 
@@ -41,22 +49,34 @@ git clone https://github.com/shinatxo/to-do-list-app.git
 cd to-do-list-app
 ```
 
-### 2️⃣ Run the Backend
+### 2️⃣ Backend Setup
 Ensure you have **Java 17+** and **Maven** installed.
 ```sh
-cd restful-api-project
+cd backend
 mvn spring-boot:run
 ```
 Backend will be running at **http://localhost:8080**.
 
-### 3️⃣ Run the Frontend
+### 3️⃣ Frontend Setup
 Ensure you have **Node.js 18+** and **npm** installed.
 ```sh
-cd todo-frontend
+cd frontend
 npm install
 npm run dev
 ```
 Open **[http://localhost:5173](http://localhost:5173)** in your browser.
+
+---
+
+## 🌐 Environment Variables
+### Frontend
+Create a `.env.production` file in the `frontend` directory with:
+```env
+VITE_API_URL=https://to-do-list-app-122e.onrender.com
+```
+
+### Backend
+No specific environment variables required, but you can configure MongoDB connection strings in `application.properties`.
 
 ---
 
@@ -90,9 +110,19 @@ This will start both the frontend and backend as containers.
 
 ---
 
-## 🚀 Deployment (Coming Soon)
-- The application is structured for **cloud deployment** (e.g., **Heroku, AWS, or Vercel**).
-- More details will be added soon.
+## 🚀 Deployment on Render
+This application is deployed on **Render** for both frontend and backend.
+
+### Deployment Links
+- **Frontend:** [https://to-do-list-app-1-v3ji.onrender.com](https://to-do-list-app-1-v3ji.onrender.com)
+- **Backend:** [https://to-do-list-app-122e.onrender.com](https://to-do-list-app-122e.onrender.com)
+
+### Redeployment Instructions
+1. **Make changes locally** and push to your GitHub repository.
+2. Go to Render Dashboard and find your **Web Service**.
+3. Select **Manual Deploy** or enable **Auto Deploy** for the respective service.
+4. **Frontend:** Navigate to Static Site and click **Deploy**.
+5. **Backend:** Navigate to Web Service and click **Deploy**.
 
 ---
 
@@ -109,4 +139,5 @@ This project is licensed under the **MIT License**.
 ---
 
 _💡 Built with love using Java, Spring Boot, React, and Tailwind CSS!_
+
 
