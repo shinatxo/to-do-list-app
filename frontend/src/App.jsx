@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const apiUrl = import.meta.env.VITE_API_URL;
-fetch(`${apiUrl}/your-endpoint`)
+fetch(`${apiUrl}/api/tasks`)
   .then(response => response.json())
   .then(data => console.log(data));
 
@@ -11,7 +11,7 @@ function App() {
   const [newTask, setNewTask] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/tasks")
+    fetch(`${apiUrl}/api/tasks`)
       .then((response) => response.json())
       .then((data) => setTasks(data))
       .catch((error) => console.error("Error fetching tasks:", error));
@@ -20,7 +20,7 @@ function App() {
   const addTask = () => {
     if (!newTask.trim()) return;
 
-    fetch("http://localhost:8080/api/tasks", {
+    fetch(`${apiUrl}/api/tasks`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: newTask, completed: false }),
@@ -36,7 +36,7 @@ function App() {
   const toggleCompletion = (task) => {
     const updatedTask = {...task, completed: !task.completed};
   
-    fetch(`http://localhost:8080/api/tasks/${task.id}`, {
+    fetch(`${apiUrl}/api/tasks/${task.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedTask),
@@ -50,7 +50,7 @@ function App() {
 
   const deleteTask = (id) => {
     console.log("Deleting task with id:", id);
-    fetch(`http://localhost:8080/api/tasks/${id}`, {
+    fetch(`${apiUrl}/api/tasks/${id}`, {
       method: "DELETE"
     })
       .then(() => setTasks(tasks.filter(task => task.id !== id)))
@@ -58,7 +58,7 @@ function App() {
   };
 
   const clearTasks = () => {
-    fetch("http://localhost:8080/api/tasks/all", {
+    fetch(`${apiUrl}/api/tasks/all`, {
       method: "DELETE"
     })
       .then(() => setTasks([]))

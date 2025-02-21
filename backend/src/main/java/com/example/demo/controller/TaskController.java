@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import jakarta.validation.Valid;
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://to-do-list-app-1-y3ji.onrender.com")
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
