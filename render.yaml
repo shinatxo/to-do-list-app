@@ -10,7 +10,7 @@ services:
     healthCheckPath: /
     plan: free
 
-  - type: static_site  # <-- Change here from "static" to "static_site"
+  - type: static   # <-- Changed from "static_site" to "static"
     name: todo-frontend
     rootDir: todo-frontend
     buildCommand: npm run build
