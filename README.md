@@ -1,143 +1,54 @@
-# To-Do List App
+# Task Manager – RESTful To-Do List API
 
-This is a full-stack **To-Do List Application** built with **Java (Spring Boot) for the backend** and **React (Vite) for the frontend**. It provides a simple and efficient way to manage tasks with full CRUD functionality.
+A full-stack task management system built with Java 17, Spring Boot, and MongoDB. This project was developed as a practical demonstration of backend skills for a junior developer role.
 
----
+## 🔧 Tech Stack
 
-## 🚀 Live Demo
-- **Frontend:** [https://to-do-list-app-1-y3ji.onrender.com](https://to-do-list-app-1-y3ji.onrender.com)
-- **Backend API Base URL:** [https://to-do-list-app-122e.onrender.com](https://to-do-list-app-122e.onrender.com)
+- Java 17  
+- Spring Boot 3.4.2  
+- MongoDB Atlas  
+- Spring Security  
+- RESTful APIs  
+- Docker (optional)  
+- Postman (API testing)  
+- Deployed on Render
 
----
+## ✅ Features
 
-## 🚀 Features
-- RESTful API with full CRUD operations
-- MongoDB for data storage
-- Frontend built with React + Vite
-- Tailwind CSS for styling
-- Uses Postman for API testing
-- Docker setup for containerization
-- CORS enabled for frontend-backend communication
-- **Deployed on Render**
+- User registration and login with encrypted passwords
+- Create, update, delete, and retrieve tasks
+- Task filtering and sorting
+- CORS and role-based access configuration
+- JSON request/response body validation
 
----
+## 🔐 Security
 
-## 🛠️ Tech Stack
-### Backend:
-- **Java 17**
-- **Spring Boot 3.4.2**
-- **Spring Data MongoDB**
-- **Spring Security (configured for CORS & API access)**
-- **JUnit for testing**
+- Environment-based configuration (e.g., API keys)
+- Follows OWASP Top 10 security practices
+- Spring Security for authentication and authorization
 
-### Frontend:
-- **React (Vite)**
-- **Fetch API for API requests**
-- **Tailwind CSS for modern styling**
+## 🚀 Deployment
 
-### Deployment:
-- **Render** (Cloud deployment for both frontend and backend)
-- **Docker & Docker Compose** (for containerized setup)
+The application is deployed via Render. The API is live at:
+[https://todo-backend.onrender.com](#)
 
----
+You can test the endpoints using the included Postman collection.
 
-## 🏗️ Installation & Setup
+## 📂 Project Structure
 
-### 1️⃣ Clone the Repository
-```sh
-git clone https://github.com/shinatxo/to-do-list-app.git
-cd to-do-list-app
+```bash
+src/
+  ├── config/
+  ├── controller/
+  ├── model/
+  ├── repository/
+  └── service/
 ```
 
-### 2️⃣ Backend Setup
-Ensure you have **Java 17+** and **Maven** installed.
-```sh
-cd backend
-mvn spring-boot:run
-```
-Backend will be running at **http://localhost:8080**.
+## 🧪 Testing
 
-### 3️⃣ Frontend Setup
-Ensure you have **Node.js 18+** and **npm** installed.
-```sh
-cd frontend
-npm install
-npm run dev
-```
-Open **[http://localhost:5173](http://localhost:5173)** in your browser.
+All endpoints tested with Postman. Includes basic unit/integration testing via JUnit (can expand further).
 
----
+## 🤝 Collaboration
 
-## 🌐 Environment Variables
-### Frontend
-Create a `.env.production` file in the `frontend` directory with:
-```env
-VITE_API_URL=https://to-do-list-app-122e.onrender.com
-```
-
-### Backend
-No specific environment variables required, but you can configure MongoDB connection strings in `application.properties`.
-
----
-
-## 📌 API Endpoints
-| Method | Endpoint         | Description          |
-|--------|-----------------|----------------------|
-| GET    | `/api/tasks`    | Get all tasks       |
-| POST   | `/api/tasks`    | Create a new task   |
-| PUT    | `/api/tasks/{id}` | Update a task       |
-| DELETE | `/api/tasks/{id}` | Delete a task       |
-| DELETE | `/api/tasks/all` | Clear all tasks     |
-
-Test the API using **Postman** or **cURL**.
-
----
-
-## 🧪 Running Tests
-To run backend unit tests:
-```sh
-mvn test
-```
-
----
-
-## 🐳 Docker Setup (Optional)
-Build and run the application using Docker:
-```sh
-docker-compose up --build
-```
-This will start both the frontend and backend as containers.
-
----
-
-## 🚀 Deployment on Render
-This application is deployed on **Render** for both frontend and backend.
-
-### Deployment Links
-- **Frontend:** [https://to-do-list-app-1-v3ji.onrender.com](https://to-do-list-app-1-v3ji.onrender.com)
-- **Backend:** [https://to-do-list-app-122e.onrender.com](https://to-do-list-app-122e.onrender.com)
-
-### Redeployment Instructions
-1. **Make changes locally** and push to your GitHub repository.
-2. Go to Render Dashboard and find your **Web Service**.
-3. Select **Manual Deploy** or enable **Auto Deploy** for the respective service.
-4. **Frontend:** Navigate to Static Site and click **Deploy**.
-5. **Backend:** Navigate to Web Service and click **Deploy**.
-
----
-
-## 👥 Contributors
-- **Shina Oguntoye**
-
-Feel free to fork, contribute, or report issues!
-
----
-
-## 📜 License
-This project is licensed under the **MIT License**.
-
----
-
-_💡 Built with love using Java, Spring Boot, React, and Tailwind CSS!_
-
-
+This repo is part of my public portfolio and available under the MIT License.
